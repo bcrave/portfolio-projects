@@ -28,12 +28,25 @@ const controlSearch = async () => {
     await state.search.getResults();
 
     // 5. render results on UI
-    // clearLoader();
+    clearLoader();
     searchView.renderRecipes(state.search.recipes);
+
+    // console.log(state.search.recipes);
   }
 };
 
 elements.searchForm.addEventListener("submit", (event) => {
   event.preventDefault();
   controlSearch();
+});
+
+elements.searchResPages.addEventListener("click", (event) => {
+  const button = event.target.closest(".btn-inline");
+
+  if (button) {
+    const goToPage = parseInt(button.dataset.goto, 10);
+
+    searchView.clearResults();
+    searchView.renderRecipes(state.search.recipes, goToPage);
+  }
 });
