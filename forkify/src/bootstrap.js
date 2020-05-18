@@ -134,8 +134,11 @@ elements.shopping.addEventListener("click", (event) => {
 
     // Handle count update
   } else if (event.target.matches(".shopping__count-value")) {
+    state.list.count = 0;
     const val = parseFloat(event.target.value, 10);
-    state.list.updateCount(id, val);
+    if (val > 0) {
+      state.list.updateCount(id, val);
+    }
   }
 });
 
